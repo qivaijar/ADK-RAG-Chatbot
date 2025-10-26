@@ -1,0 +1,5 @@
+app_name: rag_chatbot
+
+# endpoints
+user_session_url: http://{host}:{port}/apps/{app_name}/users/{user_id}/sessions/{session_id}
+send_query_url: http://{host}:{port}/run
