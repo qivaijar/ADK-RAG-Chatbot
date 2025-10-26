@@ -6,11 +6,11 @@ import os
 load_dotenv()
 
 storage_client = storage.Client()
-doc_bucket = os.getenv('DOC_BUCKET')
+doc_bucket = storage_client.bucket(os.getenv('DOC_BUCKET'))
 
 
 # Define agent's tools
-def upload_docs(file_paths: str) -> str:
+def upload_doc(file_path: str) -> str:
     """
     Upload new documents.
 
@@ -21,11 +21,9 @@ def upload_docs(file_paths: str) -> str:
         status (str): the status of the document upload process.
     """
     try:
-        for file in file_paths:
-            file_name = os.path.basename(file)
-            blob = bucket.blob(file_name)
-            blob.upload_from_filename(file)
-
+        file_name = os.path.basename(file_path)
+        blob = doc_bucket.blob(file_name)
+        blob.upload_from_filename(file_path)
         return f"All files have been uploaded to {doc_bucket}"
 
     except Exception as e:
@@ -43,7 +41,7 @@ def update_vector_index() -> str:
 
 
 root_agent = Agent(
-    model=config['agent_model'],
+    model=os.getenv('AGENT_MODEL'),
     name='root_agent',
     description="""
     A helpful RAG Agent that capables of:
@@ -57,9 +55,9 @@ root_agent = Agent(
         Your primary responsibilities are to manage the knowledge base content and answer user questions using only the provided knowledge.
         Your decisions on which action to take MUST follow this priority order and depend on the user's explicit intent or the current session state.
         1.  File Upload Check (New Content Addition):
-            * IF the user ask to upload a file or add documents to knowledge base, then perform file upload using 'upload_docs' tool.
-            * Action: You MUST call the `upload_docs` tool, passing the file paths found in the user's message with variable `file_paths`.
-            * Response: Check the result from 'upload docs':
+            * IF the user ask to upload a file or add documents to knowledge base, then perform file upload using 'upload_doc' tool.
+            * Action: You MUST call the `upload_docs` tool, passing the file path found in the user's message one-by-one.
+            * Response: Check the result from 'upload doc':
                 - If files are uploaded successfully, acknowledge the files were sent for processing and inform the user that their files are being incorporated into the knowledge base.
                 - If error occurs, let the user know what the error is.
         2.  **Explicit Management Command Check (List/Delete):**
@@ -72,4 +70,4 @@ root_agent = Agent(
             * **Action:** You **MUST** use the `rag_query_tool.answer_question` to retrieve and formulate a response based on the existing knowledge base content.
             * **Constraint:** You **MUST** answer the question using **ONLY** the information found in the knowledge base. Do not use your general knowledge.
     """,
-    tools=[upload_docs])
+    tools=[upload_doc])

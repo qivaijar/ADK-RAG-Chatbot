@@ -31,7 +31,10 @@ def send_query(new_message: str):
     response = requests.post(url, headers=headers, json=body)
     response.raise_for_status()
     response = response.json()
-    answer = response[0]["content"]["parts"][0]["text"]
+    try:
+        answer = response[0]["content"]["parts"][0]["text"]
+    except Exception:
+        answer = response[-1]["content"]["parts"][0]["text"]
     return answer
 
 
@@ -51,7 +54,10 @@ def create_user_session_ids():
 
 def answer_question(message, history, files):
     if files is not None:
-        message.append("file_paths: {files}")
+        message += " Files to be uploaded:"
+        for file in files:
+            message += f"\n- {file}"
+    print(message)
     result = send_query(message)
     return result
 
