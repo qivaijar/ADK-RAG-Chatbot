@@ -7,25 +7,17 @@ import os
 
 
 def send_query(new_message: str):
-    url = config['send_query_url'].format(
-        host=os.getenv('AGENT_HOST'),
-        port=os.getenv('AGENT_PORT')
+    url = config["send_query_url"].format(
+        host=os.getenv("AGENT_HOST"), port=os.getenv("AGENT_PORT")
     )
 
     headers = {"Content-Type": "application/json"}
 
     body = {
-        "app_name": config['app_name'],
+        "app_name": config["app_name"],
         "user_id": user_id,
         "session_id": session_id,
-        "new_message": {
-            "role": "user",
-            "parts": [
-                {
-                    "text": new_message
-                }
-            ]
-        }
+        "new_message": {"role": "user", "parts": [{"text": new_message}]},
     }
 
     response = requests.post(url, headers=headers, json=body)
@@ -40,13 +32,15 @@ def send_query(new_message: str):
 
 def create_user_session_ids():
     user_id, session_id = str(uuid.uuid4()), str(uuid.uuid4())
-    response = requests.post(config['user_session_url'].format(
-        host=os.getenv('AGENT_HOST'),
-        port=os.getenv('AGENT_PORT'),
-        app_name=config['app_name'],
-        user_id=user_id,
-        session_id=session_id
-    ))
+    response = requests.post(
+        config["user_session_url"].format(
+            host=os.getenv("AGENT_HOST"),
+            port=os.getenv("AGENT_PORT"),
+            app_name=config["app_name"],
+            user_id=user_id,
+            session_id=session_id,
+        )
+    )
 
     response.raise_for_status()
     return user_id, session_id
@@ -85,7 +79,7 @@ if __name__ == "__main__":
             gr.Files(label="Upload a file to add it to the RAG knowledge base.")
         ],
         title="Google ADK RAG Chatbot",
-        description="An Chatbot implementation of RAG-based system using Google ADK, developed by Rizki Rivai Ginanjar."
+        description="An Chatbot implementation of RAG-based system using Google ADK, developed by Rizki Rivai Ginanjar.",
     )
 
     demo.launch(share=False, show_api=False)

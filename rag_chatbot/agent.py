@@ -1,48 +1,13 @@
-from google.adk.agents.llm_agent import Agent
-from google.cloud import storage
 from dotenv import load_dotenv
+from google.adk.agents.llm_agent import Agent
+from .tools import upload_doc, list_docs
 import os
 
 load_dotenv()
 
-storage_client = storage.Client()
-doc_bucket = storage_client.bucket(os.getenv('DOC_BUCKET'))
-
-
-# Define agent's tools
-def upload_doc(file_path: str) -> str:
-    """
-    Upload new documents.
-
-    Args:
-        file_paths (str): The paths of the file that will be added into RAG knowledge base.
-
-    Returns:
-        status (str): the status of the document upload process.
-    """
-    try:
-        file_name = os.path.basename(file_path)
-        blob = doc_bucket.blob(file_name)
-        blob.upload_from_filename(file_path)
-        return f"All files have been uploaded to {doc_bucket}"
-
-    except Exception as e:
-        return f"An error occured during upload: {e}"
-
-
-def update_vector_index() -> str:
-    """
-    Create or update vector index after adding new file(s).
-
-    Returns:
-        status (str): the status of the vector update process.
-    """
-    pass
-
-
 root_agent = Agent(
-    model=os.getenv('AGENT_MODEL'),
-    name='root_agent',
+    model=os.getenv("AGENT_MODEL"),
+    name="main_agent",
     description="""
     A helpful RAG Agent that capables of:
     1. Answering user questions based on a knowledge base.
@@ -70,4 +35,5 @@ root_agent = Agent(
             * **Action:** You **MUST** use the `rag_query_tool.answer_question` to retrieve and formulate a response based on the existing knowledge base content.
             * **Constraint:** You **MUST** answer the question using **ONLY** the information found in the knowledge base. Do not use your general knowledge.
     """,
-    tools=[upload_doc])
+    tools=[upload_doc, list_docs],
+)
