@@ -51,7 +51,6 @@ def answer_question(message, history, files):
         message += " Files to be uploaded:"
         for file in files:
             message += f"\n- {file}"
-    print(message)
     result = send_query(message)
     return result
 
