@@ -108,7 +108,7 @@ However, for knowledge updates based on uploaded documents, there are specific r
 1. **Agent reasoning model**: `Gemini 2.5 Flash` - Vertex AI
 2. **Text embedding model**: `Gemini Embedding 001 (dimension 1536)` - Vertex AI 
 3. **Re-ranker model**: `Semantic Ranker Fast 004` - Discovery Engine API
-3. **RAG Answer Generator model**: `Semantic Ranker Fast 004` - Cloud Run-hosted model (vLLm, with gpu support)
+3. **RAG Answer Generator model**: `Gemma 3 4b it` - Cloud Run-hosted model (vLLm, with gpu support)
 
 ---
 
