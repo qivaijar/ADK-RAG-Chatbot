@@ -14,7 +14,7 @@ load_dotenv()
 
 root_agent = Agent(
     model=os.getenv("AGENT_MODEL"),
-    name="main_agent",
+    name="root_agent",
     description="""
     A helpful RAG Agent that capables of:
     1. Answering user questions based on a knowledge base.

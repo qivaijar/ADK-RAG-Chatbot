@@ -1,0 +1,96 @@
+vPost
+
+LOB    
+vPost    
+
+Issue    
+Dangerous / Partial Dangerous Item    
+
+Country     
+All FFP    
+
+System     
+vPost Account    
+
+Option    
+Process    
+
+3rd Party Courier    
+
+Customers can use any 3rd party international courier company to ship their package.  
+Customer to reach out to 3rd party courier companies and arrange for pickup of the package from our warehouse.  
+Admin fee of $10 is applicable for FFP to handover the item to 3rd party courier companies.  
+CS to request the following information from customer:  
+Name of appointed courier company  
+Date & Time of Pickup (At least 3 working days from the date of email)  
+Shipping label from the courier company  
+Merchant Invoice  
+Commercial / Customs invoice  
+CS needs to assign the case to – vPost CS Ops request to create a dummy invoice for the Admin Fee.  
+Informed customer to proceed with the payment once dummy invoice created.  
+Verify customer’s payment.  
+Then assign the case to respective FFP to handover the item to 3rd party courier.  
+
+P/S: Self-service option is not available.  
+
+Redirection to different Address within source Country    
+
+Customer can initiate the self – service option for Redirection request through the vPost account.  
+Customer can make the payment for redirection fee in the vPost account too.  
+IF customer refuse or unable to proceed with self-service option then CS to advise customer to provide written request to redirect their package.  
+Assign the case to – vPost CS Ops request to create dummy invoice for redirection fee.  
+Assigned the request to FFP once customer made payment for the redirection fee.  
+
+Return to merchant    
+Customer to reach out to the merchant and request for Return Label.  
+Advice customer that admin fee of $6.50 is applicable for this request.  
+Customer can initiate the self – service redirection option and make payment via vPost account.  
+IF customer refuse or unable to proceed with self-service option then CS to advise customer to provide written request to return the package to merchant.  
+Assign the case to – vPost CS Ops request to create dummy invoice for return fee.  
+Assigned the request to FFP once customer made payment for the return fee.  
+
+Discard     
+Dangerous Good Package  
+
+Obtain consent from customer to discard the whole package.  
+Advise customer that there is no additional charges for discarding the package.  
+CS to request the following information from customer and assign to – vPost CT Ops  
+Name  
+Contact No  
+Email  
+VP ID  
+Box No  
+Instruction: Discard the whole package.  
+
+Partial Dangerous Good Package  
+
+Obtain consent from customer to discard the PDG items and ship the rest of the packages.  
+Advise customer that there is no additional charges for discarding the PDG items.   
+CS to request the following information from customer and assign to FFP.  
+
+Name  
+Contact No  
+Email  
+VP ID  
+Box No  
+Instruction: Discard the PDG items and ship the rest.  
+
+Material Safety Data Sheet (MSDS)    
+
+If customer insist the item is not DG and demand for the item to be shipped to SG  
+
+MSDS  
+This form is to ascertain if the item is acceptable for shipment and if it meets safety requirements.  
+Prepared and provided by manufacturers.  
+It is a technical document which provides detailed and comprehensive information on a controlled product relating to  
+Health effects on exposure to the product  
+Hazard evaluation relating to the product’s handling storage or usage  
+Emergency procedures  
+
+CS to informed customer to provide the MSDS form.  
+Assign the completed MSDS form to respective FFP.  
+FFP will review the form for approval. If:  
+Approved – we can proceed to ship the item through vPost  
+Disapprove – Advise customer the DG item shipping option.  
+
+Prepared by Thina (7/12/2023)

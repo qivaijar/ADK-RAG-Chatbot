@@ -8,7 +8,7 @@ import os
 
 def send_query(new_message: str):
     url = config["send_query_url"].format(
-        host=os.getenv("AGENT_HOST"), port=os.getenv("AGENT_PORT")
+        host=os.getenv("AGENT_HOST")
     )
 
     headers = {"Content-Type": "application/json"}
@@ -35,7 +35,6 @@ def create_user_session_ids():
     response = requests.post(
         config["user_session_url"].format(
             host=os.getenv("AGENT_HOST"),
-            port=os.getenv("AGENT_PORT"),
             app_name=config["app_name"],
             user_id=user_id,
             session_id=session_id,
