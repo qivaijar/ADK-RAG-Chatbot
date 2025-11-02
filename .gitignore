@@ -209,3 +209,4 @@ __marimo__/
 rag_chatbot/.env
 ui/.env
 rag_chatbot/*.json
+*.json
