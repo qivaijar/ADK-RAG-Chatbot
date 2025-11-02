@@ -22,6 +22,7 @@ from bs4 import BeautifulSoup
 # Define global variables
 load_dotenv()
 storage_client = storage.Client()
+
 genai_client = genai.Client(
     vertexai=True,
     api_key=os.getenv('GOOGLE_API_KEY')
@@ -395,7 +396,7 @@ def list_knowledge_sources() -> list[str]:
     return source_list
 
 
-def _rerank_contexts(query, input_df, top_n=5) -> list[str]:
+def _rerank_contexts(query, input_df, top_n=10, score_threshold=0.2) -> list[str]:
     model = f"projects/{os.getenv('GOOGLE_CLOUD_PROJECT')}/locations/{os.getenv(
         'GOOGLE_CLOUD_LOCATION')}/rankingConfigs/default_ranking_config"
 
@@ -418,8 +419,8 @@ def _rerank_contexts(query, input_df, top_n=5) -> list[str]:
 
     response = rerank_client.rank(request=request)
     response = response.records
-    ranked_contexts = [(x.id, x.content) for x in response]
-
+    ranked_contexts = [(x.id, x.content)
+                       for x in response if x.score > score_threshold]
     return ranked_contexts
 
 
@@ -492,7 +493,7 @@ def generate_rag_answer(user_query: str) -> str:
     possible_contexts = my_index_endpoint.find_neighbors(
         deployed_index_id=os.getenv('INDEX_ENDPOINT_ID'),
         queries=[query_vector],
-        num_neighbors=10,
+        num_neighbors=20,
         return_full_datapoint=False
     )
     neighbors = possible_contexts[0]
