@@ -3,7 +3,21 @@ import uuid
 import yaml
 import requests
 from dotenv import load_dotenv
+from google.cloud import storage
 import os
+
+storage_client = storage.Client()
+
+
+def upload_docs(file_paths: list[str]) -> str:
+    try:
+        doc_bucket = storage_client.bucket(os.getenv("DOC_BUCKET"))
+        for file in file_paths:
+            file_name = os.path.basename(file)
+            blob = doc_bucket.blob(file_name)
+            blob.upload_from_filename(file)
+    except Exception as e:
+        return f"An error occured during upload: {e}"
 
 
 def send_query(new_message: str):
@@ -47,9 +61,8 @@ def create_user_session_ids():
 
 def answer_question(message, history, files):
     if files is not None:
-        message += " Files to be uploaded:"
-        for file in files:
-            message += f"\n- {file}"
+        upload_docs(files)
+        return "File(s) has been uploaded into the document bucket!"
     result = send_query(message)
     return result
 
