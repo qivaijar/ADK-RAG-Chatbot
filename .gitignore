@@ -210,3 +210,5 @@ rag_chatbot/.env
 ui/.env
 rag_chatbot/*.json
 *.json
+*/.env.prod
+*/.env.dev
