@@ -12,9 +12,15 @@ An **agentic RAG (Retrieval-Augmented Generation)** system built using **Google�
 
 2. Access the Gradio interface via the URL provided by the ui service.
 
-3. To upload a file: Send a command/query to initiate the upload, then select your file by clicking the Additional Inputs box below the main text input.
+3. To upload a file: Send a message (could be an empty message) after selecting documents using the "Additional input" field, below the text-box.
 
-4. Perform all other actions (document management, source listing, RAG updates, or question answering) by sending a clear natural language query (e.g., "delete document X" or "update the RAG knowledge base to the newest version!").
+4. Example Commands You Can Send (Based on Agent Tools)
+
+- **List bucket's documents** – List all documents inside the bucket.  
+- **Delete document** – Delete the *vpost term & condition* document from the bucket.  
+- **Update RAG knowledge base** – Update the RAG knowledge base to the latest version.  
+- **List RAG knowledge sources** – List all knowledge sources used to construct the RAG knowledge base.  
+- **Generate RAG answer** – Example: *What would be the reasons my vpost payment was unsuccessful?*
 
 ---
 
@@ -38,10 +44,6 @@ Users interact with the system through the Gradio UI by sending messages and opt
 
 All tools are hosted on the same **Cloud Run** instance as the Agent.  
 The following tools are currently available:
-
-####  `upload_doc`
-
-Uploads a document to the **GCP bucket** where other RAG knowledge base documents are stored.
 
 ####  `list_docs`
 
