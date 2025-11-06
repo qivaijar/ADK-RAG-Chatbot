@@ -2,7 +2,6 @@ import os
 from dotenv import load_dotenv
 from google.adk.agents.llm_agent import Agent
 from .tools import (
-    upload_doc,
     list_docs,
     delete_doc,
     update_rag_knowledge,
@@ -30,7 +29,6 @@ root_agent = Agent(
     5. After using generate_rag_answer, DO NOT modify the answer before sending it back to the user. Use the generated answer as it is and send the answer to the user.
     """,
     tools=[
-        upload_doc,
         list_docs,
         delete_doc,
         update_rag_knowledge,

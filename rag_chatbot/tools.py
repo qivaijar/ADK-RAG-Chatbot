@@ -48,27 +48,6 @@ connector = Connector()
 
 
 # Define tools and supporting functions
-def upload_doc(file_path: str) -> str:
-    """
-    Upload new document to the bucket.
-
-    Args:
-        file_paths (str): The paths of the file that will be added into bucket (for RAG knowledge base).
-
-    Returns:
-        status (str): the status of the document upload process.
-    """
-    try:
-        doc_bucket = storage_client.bucket(os.getenv("DOC_BUCKET"))
-        file_name = os.path.basename(file_path)
-        blob = doc_bucket.blob(file_name)
-        blob.upload_from_filename(file_path)
-        return f"All files have been uploaded to {doc_bucket}"
-
-    except Exception as e:
-        return f"An error occured during upload: {e}"
-
-
 def list_docs() -> list[str]:
     """
     List the documents inside the bucket.
@@ -453,6 +432,8 @@ def generate_rag_answer(user_query: str) -> str:
     When responding:
     - Be concise, factual, and directly answer the user's question.
     - **Cite all unique sources used to formulate your answer at the end of your response.**
+    - Do not list the source that does not correlate or used in the answer.
+    - If the answer relates to multiple similar sources (sources with exactly similar names), only list one of them.
 
     Format:
     - Provide a clear, well-structured answer.
